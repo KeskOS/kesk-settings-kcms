@@ -1,13 +1,40 @@
 # kesk-settings-kcms
 
-Compatibility package that installs the new keskos-settings package
+`kesk-settings-kcms` is a compatibility shim package that exists only to pull in the renamed `keskos-settings` package.
 
-This repository contains the standalone Arch package source for `kesk-settings-kcms`.
+## What this is
 
-## Contents
+This repository preserves the older package name used by earlier KeskOS setups so upgrades can move users onto `keskos-settings` without manual intervention.
 
-- `PKGBUILD`
-- `files/` for packaged assets, scripts, themes, or source snapshots where needed
+## Role in KeskOS
+
+Compatibility package.
+
+## Package name
+
+```txt
+Package: kesk-settings-kcms
+Repo: [keskos]
+Architecture: any
+```
+
+## What it installs or provides
+
+- Installs no runtime files of its own.
+- Depends on `keskos-settings` so the current settings package is installed automatically.
+
+## Commands and launchers
+
+- This package does not install commands or GUI launchers; use `keskos-settings` after installation.
+
+## Config, logs, and state
+
+- This package does not create config files, logs, or systemd units.
+
+## Dependencies
+
+- Runtime dependency: `keskos-settings`.
+- Build with `makepkg -s --noconfirm`.
 
 ## Build
 
@@ -15,9 +42,15 @@ This repository contains the standalone Arch package source for `kesk-settings-k
 makepkg -s --noconfirm
 ```
 
-## Package Metadata
+## Packaging notes
 
-- Version: `0.1.0`
-- Architectures: `any`
+- Keep this repo lightweight until old package references disappear from the user base.
+- The real functionality lives in `keskos-settings`.
 
-This repo is intended to be consumed by the KeskOS package build server and can also be built locally with standard Arch tooling.
+## Troubleshooting
+
+- If the old package name is still being referenced, installing this shim should resolve it automatically.
+
+## Docs website export notes
+
+- Docs site usage is mainly a migration note and rename notice.
