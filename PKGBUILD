@@ -1,6 +1,6 @@
 pkgname=kesk-settings-kcms
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Compatibility package that installs the new keskos-settings package"
 arch=(any)
 url="https://github.com/memegeko/keskos"

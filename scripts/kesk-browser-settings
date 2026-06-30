@@ -95,6 +95,10 @@ def resolve_package(browser: BrowserOption) -> str | None:
     return None
 
 
+def desktop_entry_exists(desktop_id: str) -> bool:
+    return any((root / desktop_id).exists() for root in (Path("/usr/share/applications"), Path.home() / ".local/share/applications"))
+
+
 def resolve_desktop_id(browser: BrowserOption) -> str:
     for desktop_id in browser.desktop_ids:
         for root in (Path("/usr/share/applications"), Path.home() / ".local/share/applications"):
@@ -130,6 +134,9 @@ def current_default_desktop() -> str:
 
 def set_default(browser: BrowserOption) -> dict:
     desktop_id = resolve_desktop_id(browser)
+    if not desktop_entry_exists(desktop_id):
+        return {"ok": False, "message": f"{browser.label} desktop entry is not installed yet. Install or launch the browser first."}
+
     details: list[str] = [f"default desktop entry: {desktop_id}"]
 
     xdg_settings = shutil.which("xdg-settings")
